@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= profile.fullname %> — Contact</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container profile-page">
+    <div class="profile-card card">
+      <div class="top">
+        <div class="avatar"><%= profile.fullname.split(' ').map(n => n[0]).join('').toUpperCase() %></div>
+        <div class="meta">
+          <h1><%= profile.fullname %></h1>
+          <p class="muted">Contact & social links</p>
+        </div>
+      </div>
+
+      <div class="info">
+        <dl>
+          <dt>Email</dt><dd><a href="mailto:<%= profile.email %>"><%= profile.email %></a></dd>
+          <% if (profile.phone) { %>
+            <dt>Phone</dt><dd><a href="tel:<%= profile.phone %>"><%= profile.phone %></a></dd>
+          <% } %>
+          <% if (profile.linkedin) { %>
+            <dt>LinkedIn</dt><dd><a href="<%= profile.linkedin %>" target="_blank" rel="noopener"><%= profile.linkedin %></a></dd>
+          <% } %>
+          <% if (profile.instagram) { %>
+            <dt>Instagram</dt><dd><a href="<%= profile.instagram %>" target="_blank" rel="noopener"><%= profile.instagram %></a></dd>
+          <% } %>
+        </dl>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="/">Create another</a>
+        <a class="btn ghost" href="/p/<%= profile.id %>/vcard">Download vCard</a>
+      </div>
+
+      <footer class="muted small">Profile created: <%= new Date(profile.createdAt).toLocaleString() %></footer>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!-- to try the app , navigate to the folder by CD then run npm install and npm start or node server.js -->
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QR Profile Generator</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>QR Profile Generator</h1>
+      <p class="muted">Enter your details, get a QR code that links to a professional profile page.</p>
+    </header>
+
+    <main class="card">
+      <form action="/create" method="post" class="form">
+        <div class="row">
+          <label>Full name*</label>
+          <input name="fullname" required placeholder="e.g. Jane Doe" />
+        </div>
+
+        <div class="row">
+          <label>Email*</label>
+          <input name="email" type="email" required placeholder="you@example.com" />
+        </div>
+
+        <div class="row">
+          <label>Phone</label>
+          <input name="phone" placeholder="+1 555 555 5555" />
+        </div>
+
+        <div class="row">
+          <label>Instagram</label>
+          <input name="instagram" placeholder="https://instagram.com/yourhandle" />
+        </div>
+
+        <div class="row">
+          <label>LinkedIn</label>
+          <input name="linkedin" placeholder="https://linkedin.com/in/yourprofile" />
+        </div>
+
+        <div class="row actions">
+          <button type="submit" class="btn">Generate QR & Profile</button>
+        </div>
+      </form>
+    </main>
+
+    <% if (qrDataUrl) { %>
+      <section class="result card">
+        <h2>QR code and profile</h2>
+        <div class="result-grid">
+          <div class="qr-column">
+            <img src="<%= qrDataUrl %>" alt="QR Code" class="qr" />
+            <p class="muted">Scan with your phone camera (or copy link):</p>
+            <a href="<%= profileUrl %>" target="_blank"><%= profileUrl %></a>
+          </div>
+
+          <div class="preview-column">
+            <h3>Profile preview</h3>
+            <div class="profile-preview">
+              <h4><%= preview.fullname %></h4>
+              <p><strong>Email:</strong> <%= preview.email %></p>
+              <% if (preview.phone) { %><p><strong>Phone:</strong> <%= preview.phone %></p><% } %>
+              <% if (preview.instagram) { %><p><strong>Instagram:</strong> <a href="<%= preview.instagram %>" target="_blank"><%= preview.instagram %></a></p><% } %>
+              <% if (preview.linkedin) { %><p><strong>LinkedIn:</strong> <a href="<%= preview.linkedin %>" target="_blank"><%= preview.linkedin %></a></p><% } %>
+            </div>
+            <p class="muted small">Tip: For testing across devices, make sure your phone and this computer are on the same Wi-Fi. Use your computer's local IP in the URL if scanning from another device.</p>
+          </div>
+        </div>
+      </section>
+    <% } %>
+
+    <footer class="muted small">
+      © Copyright
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          . Made by Gaby Mouawad
+    </footer>
+  </div>
+</body>
+</html>
+
+<!-- to try the app , navigate to the folder by CD then run npm install and npm start or node server.js -->
